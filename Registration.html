@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login & Registration</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .hidden { display: none; }
+    .container { max-width: 400px; margin: auto; padding: 20px; }
+    .form-group { margin-bottom: 15px; }
+    input, button { width: 100%; padding: 10px; margin: 5px 0; }
+    .guest-btn { background: #444; color: #fff; border: none; cursor: pointer; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Registration Form -->
+  <form id="register-form">
+    <h2>Register</h2>
+
+    <div class="form-group">
+      <input type="text" name="name" placeholder="Full Name" required>
+    </div>
+    <div class="form-group">
+      <input type="tel" name="phone" placeholder="Phone Number" required pattern="[0-9]{10}">
+    </div>
+    <div class="form-group">
+      <input type="text" name="userid" placeholder="User ID" required>
+    </div>
+    <div class="form-group">
+      <input type="password" name="password" placeholder="Password" required minlength="6">
+    </div>
+    <div class="form-group">
+      <input type="text" id="otp" placeholder="Enter OTP" required>
+      <button type="button" onclick="sendOTP()">Send OTP</button>
+    </div>
+
+    <button type="submit">Register</button>
+    <button type="button" class="guest-btn" onclick="continueAsGuest()">Continue without Login</button>
+    <div class="account-text">Already have an account? <a href="#" onclick="showLogin()">Login</a></div>
+  </form>
+
+  <!-- Login Form -->
+  <form id="login-form" class="hidden">
+    <h2>Login</h2>
+
+    <div class="form-group">
+      <input type="text" name="userid" placeholder="User ID" required>
+    </div>
+    <div class="form-group">
+      <input type="password" name="password" placeholder="Password" required minlength="6">
+    </div>
+
+    <button type="submit">Login</button>
+    <div class="account-text">Don’t have an account? <a href="#" onclick="showRegister()">Register</a></div>
+
+    
+    <!-- Guest button -->
+    <button type="button" class="guest-btn" onclick="continueAsGuest()">Continue without Login</button>
+  </form>
+</div>
+
+<script>
+  const registerForm = document.getElementById("register-form");
+  const loginForm = document.getElementById("login-form");
+
+  function showLogin() {
+    registerForm.classList.add("hidden");
+    loginForm.classList.remove("hidden");
+  }
+
+  function showRegister() {
+    loginForm.classList.add("hidden");
+    registerForm.classList.remove("hidden");
+  }
+
+  // OTP mock logic
+  function sendOTP() {
+    let otp = Math.floor(1000 + Math.random() * 9000);
+    alert("Your OTP is: " + otp);
+    sessionStorage.setItem("otp", otp);
+  }
+
+  // Handle Register Form
+  registerForm.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const enteredOtp = document.getElementById("otp").value;
+    const realOtp = sessionStorage.getItem("otp");
+
+    if (enteredOtp !== realOtp) {
+      alert("❌ Invalid OTP, try again.");
+      return;
+    }
+
+    let user = {
+      userid: registerForm.userid.value,
+      password: registerForm.password.value
+    };
+    localStorage.setItem("user", JSON.stringify(user));
+
+    alert("✅ Registration Successful!");
+    showLogin();
+  });
+
+  // Handle Login Form
+  loginForm.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    let savedUser = JSON.parse(localStorage.getItem("user"));
+    let enteredUserId = loginForm.userid.value;
+    let enteredPassword = loginForm.password.value;
+
+    if (savedUser && savedUser.userid === enteredUserId && savedUser.password === enteredPassword) {
+      alert("✅ Logged in successfully!");
+      window.location.href = "https://kevinlomesome.netlify.app/";
+    } else {
+      alert("❌ Invalid User ID or Password!");
+    }
+  });
+
+  // Continue as Guest
+  function continueAsGuest() {
+    alert("⚡ Redirecting as Guest...");
+    window.location.href = "https://kevinlomesome.netlify.app/"; 
+  }
+
+  // Auto-check: if no user exists, directly show guest option
+  window.onload = function() {
+    let savedUser = JSON.parse(localStorage.getItem("user"));
+    if (!savedUser) {
+      // If no registered user, go directly to login form with guest option
+      showLogin();
+    }
+  }
+</script>
+
+</body>
+</html>
