@@ -1,0 +1,138 @@
+/* === GLOBAL RESET === */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&family=Raleway:wght@400;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  border: none;
+  outline: none;
+  font-family: 'Poppins', sans-serif;
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  background: #000;
+  color: #f1f5f9;
+  overflow-x: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* === FORM CONTAINER === */
+.container {
+  width: 380px;
+  background: #111;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 25px rgba(99,102,241,0.4);
+}
+
+h2 {
+  text-align: center;
+  color: #14b8a6;
+  margin-bottom: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.2rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid #6366f1;
+  border-radius: 0.8rem;
+  background: transparent;
+  color: #fff;
+  font-size: 1.4rem;
+}
+
+.form-group input:focus {
+  border-color: #14b8a6;
+  box-shadow: 0 0 10px rgba(20,184,166,0.6);
+}
+
+/* === BUTTONS (Unified with portfolio style) === */
+.btn {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  border-radius: 2rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 0.1rem;
+  border: 2px solid #6366f1;
+  background: transparent;
+  color: #6366f1;
+  cursor: pointer;
+  transition: 0.3s ease;
+  width: auto;
+}
+
+.btn:hover {
+  background: linear-gradient(135deg, #6366f1, #14b8a6);
+  color: #fff;
+  box-shadow: 0 0 20px rgba(20,184,166,0.7);
+  transform: scale(1.05);
+}
+
+/* Guest Button */
+.guest-btn {
+  border: 2px solid #14b8a6;
+  color: #14b8a6;
+}
+
+.guest-btn:hover {
+  background: #14b8a6;
+  color: #fff;
+  box-shadow: 0 0 12px rgba(20,184,166,0.6);
+}
+
+/* OTP Button */
+.otp-btn {
+  border: 2px solid #6366f1;
+  color: #6366f1;
+  padding: 0.6rem 1.6rem;
+  border-radius: 2rem;
+  font-size: 1.3rem;
+  transition: 0.3s ease;
+}
+
+.otp-btn:hover {
+  background: #6366f1;
+  color: #fff;
+  box-shadow: 0 0 12px rgba(99,102,241,0.6);
+  transform: scale(1.05);
+}
+
+/* Already have an account text */
+.account-text {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 1.3rem;
+  color: #aaa;
+}
+
+.account-text a {
+  color: #14b8a6;
+  font-weight: 500;
+  transition: 0.3s ease;
+}
+
+.account-text a:hover {
+  color: #6366f1;
+  text-decoration: underline;
+}
+
+/* Utility */
+.hidden {
+  display: none;
+}
